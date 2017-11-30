@@ -42,7 +42,11 @@
     <section id="jobs" >
         <div class="container">
             <div class="row text-center">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
                 <div class="col-sm-12">
+                @using (Html.BeginForm("Verify", "Vote", FormMethod.Post))
+                {
                     <div class="jumbotron">
                         <h3>Please Enter Your ID</h3>
                         <div class="col-sm-6" style="margin-left: 230px">
@@ -51,12 +55,15 @@
                             </div>
                         </div>
                         <br /><br />
-                    </div>
-                    <a href="#" class="btn btn-primary" style="margin-top: -220px">Verify</a>
+                    </div>                    
+                    <button type="submit" class="btn btn-primary" style="margin-top: -220px">Verify</button>
+                }
                 </div>
             </div>
 
-            <form id="show_message" style="display:none">
+
+        @using (Html.BeginForm("Verify", "Vote", FormMethod.Post, new { id = "show_message", style = "display:none" }))
+        {
                 <div class="row" style="padding-left: 399px">
                     <div class="col-sm-6">
                         <h2>Creating Account To Vote</h2>
@@ -74,7 +81,7 @@
                     <p>&nbsp;</p>
                     <a href="#" class="btn btn-primary btn-lg">Create <i class="fa fa-address-book" aria-hidden="true"></i></a>
                 </div>
-            </form>
+        }
 
         </div>
     </section>

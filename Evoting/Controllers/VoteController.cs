@@ -23,5 +23,35 @@ namespace Evoting.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Verify()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login()
+        {
+            //generate public key > send to AS 
+            string key = Guid.NewGuid().ToString("N");
+            return RedirectToAction("create_BC", "AS", new { key = key });
+        }
+
+        public ActionResult Vote()
+        {
+            return View();
+        }
+
+        public ActionResult Candidate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult abc()
+        {
+            return View();
+        }
     }
 }

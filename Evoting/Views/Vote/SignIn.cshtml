@@ -41,9 +41,11 @@
     <section id="jobs">
         <div class="container">
             <div class="row text-center">
-                <div class="col-sm-12">
+                <div class="col-sm-12">@Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+                @using (Html.BeginForm("Login", "Vote", FormMethod.Post))
+                {
                     <div class="jumbotron">
-                        <form>
                             <div class="row" style="padding-left: 330px">
                                 <div class="col-sm-6">
                                     <h2>Login</h2>
@@ -57,31 +59,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
-                    <a href="#" class="btn btn-primary" style="margin-top: -220px">Login</a>
+                    <button type="submit" class="btn btn-primary" style="margin-top: -220px">Login</button>
+                }
                 </div>
             </div>
-
-            <form id="show_message" style="display:none">
-                <div class="row" style="padding-left: 399px">
-                    <div class="col-sm-6">
-                        <h2>Creating Account To Vote</h2>
-                        <div class="form-group" id="job-email-group">
-                            <label for="job-email">Username</label>
-                            <input type="email" class="form-control" id="job-email" placeholder="Your Username">
-                        </div>
-                        <div class="form-group" id="job-title-group">
-                            <label for="job-title">Password</label>
-                            <input type="text" class="form-control" id="job-title" placeholder="Your Password">
-                        </div>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <p>&nbsp;</p>
-                    <a href="#" class="btn btn-primary btn-lg">Create <i class="fa fa-address-book" aria-hidden="true"></i></a>
-                </div>
-            </form>
 
         </div>
     </section>

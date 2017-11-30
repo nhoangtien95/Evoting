@@ -196,6 +196,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ARController.cs" />
+    <Compile Include="Controllers\ASController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\VoteController.cs" />
@@ -276,12 +278,16 @@
     <Content Include="Views\Vote\Index.cshtml" />
     <Content Include="Views\Vote\SignUp.cshtml" />
     <Content Include="Views\Vote\SignIn.cshtml" />
+    <Content Include="Views\Vote\Vote.cshtml" />
+    <Content Include="Views\Vote\Candidate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\" />
     <Folder Include="Content\images\" />
     <Folder Include="Content\js\" />
+    <Folder Include="Views\AR\" />
+    <Folder Include="Views\AS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
