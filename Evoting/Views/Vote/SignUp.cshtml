@@ -1,4 +1,4 @@
-﻿
+﻿@model Evoting.Models.User
 @{
     ViewBag.Title = "SignUp";
 }
@@ -16,7 +16,6 @@
     <meta name="author" content="Coffeecream Themes, info@coffeecream.eu">
     <title>Sign Up To Vote</title>
     <link rel="shortcut icon" href="/Content/images/favicon.png">
-
     <!-- Main Stylesheet -->
     <link href="/Content/CSS/style.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -25,6 +24,9 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  
 
 </head>
 <body style="margin-top: -250px">
@@ -43,21 +45,24 @@
         <div class="container">
             <div class="row text-center">
                 @Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
                 <div class="col-sm-12">
                 @using (Html.BeginForm("Verify", "Vote", FormMethod.Post))
                 {
                     <div class="jumbotron">
-                        <h3>Please Enter Your ID</h3>
-                        <div class="col-sm-6" style="margin-left: 230px">
-                            <div class="form-group" id="job-email-group">
-                                <input type="email" class="form-control alert alert-warning" id="job-email" placeholder="you@yourdomain.com">
-                            </div>
+                        @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+                        <div class="col-sm-6 alert alert-danger err" style="margin-left: 230px; display: none">
+                            <h3>Fail</h3>
                         </div>
-                        <br /><br />
-                    </div>                    
-                    <button type="submit" class="btn btn-primary" style="margin-top: -220px">Verify</button>
+                            <h3>Please Enter Your ID</h3>
+                            <div class="col-sm-6" style="margin-left: 230px">
+                                <div class="form-group" id="job-email-group">
+                                    @Html.TextBoxFor(x => x.Key, new { @class = "form-control alert alert-warning", @id = "c-ID", @placeholder = "you@yourdomain.com" })
+                                </div>
+                            </div>
+                            <br /><br />
+                        </div>
                 }
+                    <input type="button" id="Verify" class="btn btn-primary" style="margin-top: -220px" value="Verify" />
                 </div>
             </div>
 
@@ -66,23 +71,26 @@
         {
                 <div class="row" style="padding-left: 399px">
                     <div class="col-sm-6">
+                        <div class="col-sm-6 alert alert-danger err-signup" id="err-signup"  style="display: none">
+                            Fail
+                        </div>
                         <h2>Creating Account To Vote</h2>
                         <div class="form-group" id="job-email-group">
                             <label for="job-email">Username</label>
-                            <input type="email" class="form-control" id="job-email" placeholder="Your Username">
+                            <input type="email" class="form-control" id="username" placeholder="Your Username">
                         </div>
                         <div class="form-group" id="job-title-group">
                             <label for="job-title">Password</label>
-                            <input type="text" class="form-control" id="job-title" placeholder="Your Password">
+                            <input type="text" class="form-control" id="password" placeholder="Your Password">
                         </div>
                     </div>
                 </div>
                 <div class="row text-center">
                     <p>&nbsp;</p>
-                    <a href="#" class="btn btn-primary btn-lg">Create <i class="fa fa-address-book" aria-hidden="true"></i></a>
+                    
                 </div>
         }
-
+            <a href="#" id="SignUp" class="btn btn-primary btn-lg">Create <i class="fa fa-address-book" aria-hidden="true"></i></a>
         </div>
     </section>
 
@@ -139,6 +147,63 @@
     <!-- jQuery Settings -->
     <script src="/Content/js/settings.js"></script>
 
+    <script>
+
+        //check ID
+        $(function () {
+
+            $('#Verify').click(function () {
+                var key = $('#c-ID').val();
+                console.log(key);
+                $.ajax({
+                    url: '@Url.Action("checkID", "Vote")',
+                    data: { 'key': key },
+                    type: 'POST',
+                    success: function (data) {
+                        if (data != null && data.success) {
+                            $('#show_message').fadeIn(500).delay(800);
+                        } else {
+                            $('.err').fadeIn(500).delay(800);
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+            });
+
+        });
+
+        //sign up
+        $(function () {
+
+            $('#SignUp').click(function () {
+                var username = $('#username').val();
+                var password = $('#password').val();
+                var key = $('#c-ID').val();
+                $.ajax({
+                    url: '@Url.Action("SingUp", "Vote")',
+                    data: { 'username': username, 'password': password },
+                    type: 'POST',
+                    success: function (data) {
+                        if (data != null && data.success) {
+                            $('#show_message').fadeIn(500).delay(800);
+                        } else {
+                            console.log(data);
+                            $('.err-signup').fadeIn(500).delay(800);
+                            console.log(document.getElementById("err-signup").innerHTML);
+                            document.getElementById("err-signup").innerHTML = data;
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+            });
+
+        });
+
+    </script>
 
 </body>
 
