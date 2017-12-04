@@ -9,7 +9,7 @@ namespace Evoting.Controllers
 {
     public class VoteController : Controller
     {
-        private Evoting.Models.Evoting db = new Models.Evoting();
+        private EvoteEntities1 db = new EvoteEntities1();
         // GET: Vote
         public ActionResult Index()
         {
@@ -27,7 +27,7 @@ namespace Evoting.Controllers
         }
 
         [HttpPost]
-        public ActionResult Verify(string key)
+        public ActionResult Verify(string key) 
         {
             var id = db.Citizens.SingleOrDefault(x => x.ID.Equals(key));
             if (id == null)
@@ -77,11 +77,27 @@ namespace Evoting.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login()
+        public ActionResult Login(string Username, string Password)
         {
-            //generate public key > send to AS 
-            string key = Guid.NewGuid().ToString("N");
-            return RedirectToAction("create_BC", "AS", new { key = key });
+            var user = db.Candidates.FirstOrDefault(x => x.Username.Equals(Username));
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Your account not exist !");
+                return View("SignIn");
+            }
+            else if (user.Password.Equals(Password))
+            {
+                Session["UserSession"] = new UserSession { Username = Username, Password = Password };
+
+                //generate public key > send to AS 
+                string key = Guid.NewGuid().ToString("N");
+                return RedirectToAction("create_BC", "AS", new { _key = key, _username = Username });
+            }
+            else
+            {
+                ModelState.AddModelError("", "Your username or password is not correct!");
+                return View("SignIn");
+            }
         }
 
         public ActionResult Vote()

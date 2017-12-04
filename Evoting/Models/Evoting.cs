@@ -12,13 +12,13 @@ namespace Evoting.Models
         {
         }
 
-        public virtual DbSet<Citizen> Citizens { get; set; }
+        //public virtual DbSet<Citizen> Citizens { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Citizen>()
-                .Property(e => e.ID)
-                .IsUnicode(false);
-        }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Citizen>()
+        //        .Property(e => e.ID)
+        //        .IsUnicode(false);
+        //}
     }
 }

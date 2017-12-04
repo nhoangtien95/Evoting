@@ -12,9 +12,13 @@ namespace Evoting.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Citizen
+    public partial class Block
     {
-        public string ID { get; set; }
-        public Nullable<int> Account { get; set; }
+        public int Block_ID { get; set; }
+        public string Block_key { get; set; }
+        public string Data { get; set; }
+        public string Code { get; set; }
+        public string Prev_ID { get; set; }
+        public string Network { get; set; }
     }
 }

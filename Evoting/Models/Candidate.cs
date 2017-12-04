@@ -12,9 +12,13 @@ namespace Evoting.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Citizen
+    public partial class Candidate
     {
-        public string ID { get; set; }
-        public Nullable<int> Account { get; set; }
+        public int ID { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string Public_key { get; set; }
+        public Nullable<int> Voted { get; set; }
+        public Nullable<int> Coin { get; set; }
     }
 }

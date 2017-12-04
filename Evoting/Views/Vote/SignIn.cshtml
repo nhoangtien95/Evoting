@@ -1,4 +1,4 @@
-﻿
+﻿@model Evoting.Models.User
 @{
     ViewBag.Title = "SignIn";
 }
@@ -41,21 +41,22 @@
     <section id="jobs">
         <div class="container">
             <div class="row text-center">
-                <div class="col-sm-12">@Html.AntiForgeryToken()
-                @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
+                <div class="col-sm-12">
+                @Html.AntiForgeryToken()                
                 @using (Html.BeginForm("Login", "Vote", FormMethod.Post))
                 {
                     <div class="jumbotron">
+                        @Html.ValidationSummary(true, null, new { @class = "alert alert-danger" })
                             <div class="row" style="padding-left: 330px">
                                 <div class="col-sm-6">
                                     <h2>Login</h2>
-                                    <div class="form-group" id="job-email-group">
+                                    <div class="form-group" id="job-username-group">
                                         <label for="job-email">Username</label>
-                                        <input type="email" class="form-control alert alert-warning" id="job-email" placeholder="Your Username">
+                                        @Html.TextBoxFor( x => x.Username, new { @class= "form-control alert alert-warning", @placeholder = "Your Username"})
                                     </div>
-                                    <div class="form-group" id="job-title-group">
+                                    <div class="form-group" id="job-password-group">
                                         <label for="job-title">Password</label>
-                                        <input type="text" class="form-control alert alert-warning" id="job-title" placeholder="Your Password">
+                                        @Html.TextBoxFor(x => x.Password, new { @class = "form-control alert alert-warning", @placeholder = "Your Password" })
                                     </div>
                                 </div>
                             </div>
