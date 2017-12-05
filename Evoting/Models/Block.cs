@@ -20,5 +20,6 @@ namespace Evoting.Models
         public string Code { get; set; }
         public string Prev_ID { get; set; }
         public string Network { get; set; }
+        public string Secret_key { get; set; }
     }
 }

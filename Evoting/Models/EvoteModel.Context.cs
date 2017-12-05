@@ -25,8 +25,8 @@ namespace Evoting.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Block> Blocks { get; set; }
         public virtual DbSet<Candidate> Candidates { get; set; }
         public virtual DbSet<Citizen> Citizens { get; set; }
+        public virtual DbSet<Block> Blocks { get; set; }
     }
 }

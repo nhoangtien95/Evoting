@@ -321,6 +321,7 @@
     <Content Include="Views\Vote\SignIn.cshtml" />
     <Content Include="Views\Vote\Vote.cshtml" />
     <Content Include="Views\Vote\Candidate.cshtml" />
+    <Content Include="Views\AS\create_BC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -328,7 +329,6 @@
     <Folder Include="Content\images\" />
     <Folder Include="Content\js\" />
     <Folder Include="Views\AR\" />
-    <Folder Include="Views\AS\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
