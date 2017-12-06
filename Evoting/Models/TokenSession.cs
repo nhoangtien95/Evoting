@@ -5,11 +5,10 @@ using System.Web;
 
 namespace Evoting.Models
 {
-    public class UserSession
+    public class TokenSession
     {
         public string Token { get; set; }
-        public string TokenKey { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public uint[] TokenKey { get; set; }
+
     }
 }
