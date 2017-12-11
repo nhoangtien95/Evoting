@@ -42,7 +42,7 @@ namespace Evoting.Controllers
                 _initial += '0';
             }
 
-            var user = db.Candidates.FirstOrDefault(x => x.Username.Equals(_username));
+            var user = db.Users.FirstOrDefault(x => x.Username.Equals(_username));
             user.Public_key = _key;
 
             db.Entry(user).State = System.Data.Entity.EntityState.Modified;

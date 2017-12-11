@@ -79,7 +79,7 @@ namespace Evoting.Controllers
         [HttpPost]
         public ActionResult Login(string Username, string Password)
         {
-            var user = db.Candidates.FirstOrDefault(x => x.Username.Equals(Username));
+            var user = db.Users.FirstOrDefault(x => x.Username.Equals(Username));
             if (user == null)
             {
                 ModelState.AddModelError("", "Your account not exist !");

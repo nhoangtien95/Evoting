@@ -15,10 +15,9 @@ namespace Evoting.Models
     public partial class Candidate
     {
         public int ID { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Public_key { get; set; }
-        public Nullable<int> Voted { get; set; }
-        public Nullable<int> Coin { get; set; }
+        public string Name { get; set; }
+        public string Degree { get; set; }
+        public string Address { get; set; }
+        public string Photo { get; set; }
     }
 }

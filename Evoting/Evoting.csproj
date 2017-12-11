@@ -230,7 +230,9 @@
       <DependentUpon>EvoteModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\TokenSession.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\User.cs">
+      <DependentUpon>EvoteModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BlockRepositories.cs" />
@@ -248,6 +250,22 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\hntu.jpg" />
+    <Content Include="Images\lacuong.jpg" />
+    <Content Include="Images\lvvang.png" />
+    <Content Include="Images\mnthang.jpg" />
+    <Content Include="Images\ncthien.jpg" />
+    <Content Include="Images\nhvu.jpg" />
+    <Content Include="Images\nmtuan.png" />
+    <Content Include="Images\nthien.jpg" />
+    <Content Include="Images\pnnam.JPG" />
+    <Content Include="Images\pvhuy.png" />
+    <Content Include="Images\tdtu.jpg" />
+    <Content Include="Images\ttmy.jpg" />
+    <Content Include="Images\ttphuoc.jpg" />
+    <Content Include="Images\tttin.png" />
+    <Content Include="Images\vdhong.jpg" />
+    <Content Include="Images\vdvinh.jpg" />
     <Content Include="Models\EvoteModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EvoteModel.edmx</DependentUpon>

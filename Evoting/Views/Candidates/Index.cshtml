@@ -1,4 +1,7 @@
-﻿
+﻿@{
+    var candidates = ViewBag.Candidates as List<Evoting.Models.Candidate>;
+    var rndcandidates = ViewBag.RndCandidate as Evoting.Models.Candidate;
+}
 <!DOCTYPE html>
 <html>
 
@@ -9,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="description" content="Jobseek - Job Board Responsive HTML Template">
     <meta name="author" content="Coffeecream Themes, info@coffeecream.eu">
-    <title>Jobseek - Job Board Responsive HTML Template</title>
+    <title>Candidates List</title>
     <link rel="shortcut icon" href="/Content/images/favicon.png">
 
     <!-- Main Stylesheet -->
@@ -53,302 +56,24 @@
                     <h2>Candidates</h2>
 
                     <div class="jobs">
-
-                        <!-- Job offer 1 -->
-                        <a href="#">
-                            <div class="featured"></div>
-                            <img src="images/job1.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Susie Johnson</h5>
-                                <p>Project Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>New York City</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>12 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>45,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 2 -->
-                        <a href="#">
-                            <div class="featured"></div>
-                            <img src="images/job2.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Matt Berry</h5>
-                                <p>Senior Web Developer</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Los Angeles</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>15 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>85,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 3 -->
-                        <a href="#">
-                            <img src="images/job3.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Spencer Conner</h5>
-                                <p>Front End Developer</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>San Francisco</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>11 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>60,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 4 -->
-                        <a href="#">
-                            <img src="images/job4.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Bernard Byrd</h5>
-                                <p>Key Account Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Boston</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>9 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>55,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 5 -->
-                        <a href="#">
-                            <img src="images/job5.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Grace Bailey</h5>
-                                <p>Sales Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Chicago</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>7 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>75,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 6 -->
-                        <a href="#">
-                            <img src="images/job1.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Susie Johnson</h5>
-                                <p>Project Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>New York City</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>12 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>45,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 7 -->
-                        <a href="#">
-                            <img src="images/job2.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Matt Berry</h5>
-                                <p>Senior Web Developer</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Los Angeles</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>15 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>85,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 8 -->
-                        <a href="#">
-                            <img src="images/job3.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Spencer Conner</h5>
-                                <p>Front End Developer</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>San Francisco</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>11 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>60,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 9 -->
-                        <a href="#">
-                            <img src="images/job4.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Bernard Byrd</h5>
-                                <p>Key Account Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Boston</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>9 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>55,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 10 -->
-                        <a href="#">
-                            <img src="images/job5.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Grace Bailey</h5>
-                                <p>Sales Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Chicago</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>7 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>75,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 11 -->
-                        <a href="#">
-                            <img src="images/job1.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Susie Johnson</h5>
-                                <p>Project Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>New York City</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>12 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>45,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 12 -->
-                        <a href="#">
-                            <img src="images/job2.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Matt Berry</h5>
-                                <p>Senior Web Developer</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Los Angeles</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>15 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>85,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 13 -->
-                        <a href="#">
-                            <img src="images/job3.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Spencer Conner</h5>
-                                <p>Front End Developer</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>San Francisco</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>11 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>60,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 14 -->
-                        <a href="#">
-                            <img src="images/job4.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Bernard Byrd</h5>
-                                <p>Key Account Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Boston</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>9 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>55,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 15 -->
-                        <a href="#">
-                            <img src="images/job5.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Grace Bailey</h5>
-                                <p>Sales Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Chicago</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>7 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>75,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 16 -->
-                        <a href="#">
-                            <img src="images/job1.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Susie Johnson</h5>
-                                <p>Project Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>New York City</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>12 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>45,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 17 -->
-                        <a href="#">
-                            <img src="images/job2.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Matt Berry</h5>
-                                <p>Senior Web Developer</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Los Angeles</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>15 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>85,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 18 -->
-                        <a href="#">
-                            <img src="images/job3.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Spencer Conner</h5>
-                                <p>Front End Developer</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>San Francisco</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>11 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>60,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 19 -->
-                        <a href="#">
-                            <img src="images/job4.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Bernard Byrd</h5>
-                                <p>Key Account Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Boston</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>9 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>55,000</span>
-                            </div>
-                        </a>
-
-                        <!-- Job offer 20 -->
-                        <a href="#">
-                            <img src="images/job5.jpg" alt="" class="img-circle" />
-                            <div class="title">
-                                <h5>Grace Bailey</h5>
-                                <p>Sales Manager</p>
-                            </div>
-                            <div class="data">
-                                <span class="city"><i class="fa fa-map-marker"></i>Chicago</span>
-                                <span class="experience"><i class="fa fa-trophy"></i>7 years</span>
-                                <span class="sallary"><i class="fa fa-dollar"></i>75,000</span>
-                            </div>
-                        </a>
+                        @foreach (var item in candidates)
+                        {
+                            <!-- Job offer 1 -->
+                            <a href="@Url.Action("CandidateDetail", "Candidates", new { _id = item.ID})">
+                                <img src="/Images/@item.Photo" alt="" class="img-circle" style="max-width: 100px; max-height: 100px; width: 100px; height: 100px" />
+                                <div class="title">
+                                    <h5>@item.Name</h5>
+                                    <p>@item.Degree</p>
+                                </div>
+                                <div class="data">
+                                    <span class="city"><i class="fa fa-map-marker"></i>@item.Address</span>
+                                    <span class="experience"><i class="fa fa-trophy"></i>TDT University</span>
+                                </div>
+                            </a>
+                        }                     
 
                     </div>
 
-                    <nav>
-                        <ul class="pagination">
-                            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-                        </ul>
-                    </nav>
 
                 </div>
                 <div class="col-sm-4" id="sidebar">
@@ -356,18 +81,17 @@
                     <!-- Featured Jobs Start -->
                     <div class="sidebar-widget">
                         <h2>Featured Candidate</h2>
-                        <a href="#">
-                            <img src="images/featured-job.jpg" alt="Featured Job" class="img-responsive" />
+                        <a href="@Url.Action("CandidateDetail", new { id = @rndcandidates.ID})">
+                            @*<img src="/Content/images/featured-job.jpg" alt="Featured Job" class="img-responsive" />*@
                             <div class="featured-job">
-                                <img src="images/job1.jpg" alt="" class="img-circle pull-left" />
+                                <img src="/Images/@rndcandidates.Photo" alt="" class="img-circle pull-left" style="max-width: 200px; max-height: 200px; width: 200px; height: 200px" />
                                 <div class="title">
-                                    <h5>Susie Johnson</h5>
-                                    <p>Project Manager</p>
+                                    <h5>@rndcandidates.Name</h5>
+                                    <p>@rndcandidates.Degree</p>
                                 </div>
                                 <div class="data">
-                                    <span class="city"><i class="fa fa-map-marker"></i>New York City</span>
-                                    <span class="experience"><i class="fa fa-trophy"></i>12 years</span>
-                                    <span class="sallary"><i class="fa fa-dollar"></i>45,000</span>
+                                    <span class="city"><i class="fa fa-map-marker"></i>@rndcandidates.Address</span>
+                                    <span class="experience"><i class="fa fa-trophy"></i>TDT University</span>
                                 </div>
                                 <div class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque tristique euismod lorem, a consequat orci consequat a. Donec ullamcorper tincidunt nunc, ut aliquam est pellentesque porta. In neque erat, malesuada sit amet orci ac, laoreet laoreet mauris.</div>
                             </div>

@@ -22,11 +22,10 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Username" Type="varchar" MaxLength="20" />
-          <Property Name="Password" Type="varchar" MaxLength="20" />
-          <Property Name="Public_key" Type="varchar" MaxLength="50" />
-          <Property Name="Voted" Type="int" />
-          <Property Name="Coin" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Degree" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Photo" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Citizen">
           <Key>
@@ -35,26 +34,27 @@
           <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Account" Type="int" />
         </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+          <Property Name="Public_key" Type="varchar" MaxLength="50" />
+          <Property Name="Voted" Type="int" />
+          <Property Name="Coin" Type="int" />
+        </EntityType>
         <EntityContainer Name="EvoteModelStoreContainer">
           <EntitySet Name="Block" EntityType="Self.Block" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Candidates" EntityType="Self.Candidates" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Citizen" EntityType="Self.Citizen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="EvoteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Candidate">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Public_key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Voted" Type="Int32" />
-          <Property Name="Coin" Type="Int32" />
-        </EntityType>
         <EntityType Name="Citizen">
           <Key>
             <PropertyRef Name="ID" />
@@ -63,9 +63,10 @@
           <Property Name="Account" Type="Int32" />
         </EntityType>
         <EntityContainer Name="EvoteEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Candidates" EntityType="Self.Candidate" />
           <EntitySet Name="Citizens" EntityType="Self.Citizen" />
           <EntitySet Name="Blocks" EntityType="EvoteModel.Block" />
+          <EntitySet Name="Candidates" EntityType="EvoteModel.Candidate" />
+          <EntitySet Name="Users" EntityType="EvoteModel.User" />
         </EntityContainer>
         <EntityType Name="Block">
           <Key>
@@ -79,24 +80,33 @@
           <Property Name="Network" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Secret_key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Public_key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Voted" Type="Int32" />
+          <Property Name="Coin" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="EvoteModelStoreContainer" CdmEntityContainer="EvoteEntities1">
-          <EntitySetMapping Name="Candidates">
-            <EntityTypeMapping TypeName="EvoteModel.Candidate">
-              <MappingFragment StoreEntitySet="Candidates">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Public_key" ColumnName="Public_key" />
-                <ScalarProperty Name="Voted" ColumnName="Voted" />
-                <ScalarProperty Name="Coin" ColumnName="Coin" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Citizens">
             <EntityTypeMapping TypeName="EvoteModel.Citizen">
               <MappingFragment StoreEntitySet="Citizen">
@@ -115,6 +125,29 @@
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="Block_key" ColumnName="Block_key" />
                 <ScalarProperty Name="Block_ID" ColumnName="Block_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Candidates">
+            <EntityTypeMapping TypeName="EvoteModel.Candidate">
+              <MappingFragment StoreEntitySet="Candidates">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EvoteModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Coin" ColumnName="Coin" />
+                <ScalarProperty Name="Voted" ColumnName="Voted" />
+                <ScalarProperty Name="Public_key" ColumnName="Public_key" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
