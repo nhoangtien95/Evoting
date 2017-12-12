@@ -11,23 +11,35 @@ namespace Evoting.Controllers
 {
     public class ARController : Controller
     {
+        private readonly EvoteEntities1 db = new EvoteEntities1();
         // GET: AR
-        public ActionResult Index()
-        {
+        public ActionResult Index(int? _id ,string _dataBase64)
+        {            
             var _token = Session["TokenSession"] as TokenSession;
             var _userToken = Session["user_TokenSession"] as UserSession;
 
             var _decryptedToken = DecryptToken(_token.Token, _token.TokenKey);
 
-            if (_userToken.Token == _decryptedToken)
+            if( _token != null && _userToken != null)
             {
-
+                 if (_userToken.Token == _decryptedToken )
+                 {
+                    if (_dataBase64 == null)
+                    {
+                        return RedirectToAction("CandidateVote", "Candidates", new { _id = _id });
+                    }
+                    else return RedirectToAction("Index", "Block", new { _id = _id, _dataBase64 = _dataBase64 });
+                    
+                 }                 
+                 else return RedirectToAction("SignIn", "Vote");
             }
+           
 
-            return View();
+            return RedirectToAction("SignIn", "Vote");
+
         }
 
-
+  
 
         //Decrypt Token
         public static string DecryptToken(string data, uint[] key)

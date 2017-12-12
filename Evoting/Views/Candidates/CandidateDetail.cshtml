@@ -18,6 +18,10 @@
     <!-- Main Stylesheet -->
     <link href="/Content/CSS/style.css" rel="stylesheet">
 
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>*@
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -205,12 +209,34 @@
                             <a href="#"><i class="fa fa-instagram fa-2x"></i></a>
                         </p>
 
-                        <button type="submit" class="btn btn-primary btn btn-danger">Vote for this candidate</button>
+                        <button type="button" class="btn btn-primary btn btn-danger" data-toggle="modal" data-target="#ComfirmModal">Vote for this candidate</button>
+                        
+                   
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="ComfirmModal" role="dialog">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Modal Header</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>This is a small modal.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="@Url.Action("CandidateVote", new { _id = candidate.ID})"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ComfirmModal" >YES</button></a>
+                                    <button type="button" class="btn btn-danger " data-dismiss="modal">NO</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--   end of Modal  -->
+
                     </div>
                 </div>
             </div>
 
-        </div>
 
 
     </section>
@@ -288,3 +314,6 @@
 
 <!-- Mirrored from coffeecreamthemes.com/themes/jobseek/site/company.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 30 Jul 2015 04:55:22 GMT -->
 </html>
+
+
+

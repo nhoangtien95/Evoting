@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\ARController.cs" />
     <Compile Include="Controllers\ASController.cs" />
+    <Compile Include="Controllers\BlockController.cs" />
     <Compile Include="Controllers\CandidatesController.cs" />
     <Compile Include="Controllers\VoteController.cs" />
     <Compile Include="Global.asax.cs">
@@ -229,6 +230,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EvoteModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PrivateKeySession.cs" />
     <Compile Include="Models\TokenSession.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>EvoteModel.tt</DependentUpon>
@@ -237,6 +239,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BlockRepositories.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\BlockChain.cs" />
+    <Compile Include="ViewModel\BlockChainModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\CSS\animate.css" />
@@ -346,6 +350,7 @@
     <Content Include="Views\AS\create_BC.cshtml" />
     <Content Include="Views\Candidates\Index.cshtml" />
     <Content Include="Views\Candidates\CandidateDetail.cshtml" />
+    <Content Include="Views\Vote\VoteSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -353,6 +358,7 @@
     <Folder Include="Content\images\" />
     <Folder Include="Content\js\" />
     <Folder Include="Views\AR\" />
+    <Folder Include="Views\Block\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

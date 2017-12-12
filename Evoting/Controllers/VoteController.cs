@@ -109,9 +109,8 @@ namespace Evoting.Controllers
         {
             return View();
         }
-
-        [HttpPost]
-        public ActionResult abc()
+        
+        public ActionResult VoteSuccess()
         {
             return View();
         }

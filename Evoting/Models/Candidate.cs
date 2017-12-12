@@ -19,5 +19,7 @@ namespace Evoting.Models
         public string Degree { get; set; }
         public string Address { get; set; }
         public string Photo { get; set; }
+        public Nullable<int> Coin { get; set; }
+        public string Public_Key { get; set; }
     }
 }
