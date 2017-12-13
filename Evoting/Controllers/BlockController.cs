@@ -41,7 +41,10 @@ namespace Evoting.Controllers
 
                 var block = new BlockChainModel();
                 block.isBlock(_user.Public_key, _block.Data, _block.Prev_ID, _block.Block_key);
-                
+
+                _user.Voted = 1;
+                db.Entry(_user).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
 
                 return RedirectToAction("VoteSuccess", "Vote");
             }

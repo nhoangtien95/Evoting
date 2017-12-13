@@ -1,7 +1,7 @@
 ﻿@{ 
     var candidate = ViewBag.Candidate as Evoting.Models.Candidate;
     var candidates = ViewBag.Candidates as List<Evoting.Models.Candidate>;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 <!DOCTYPE html>
 <html>
@@ -30,7 +30,7 @@
     <![endif]-->
 
 </head>
-<body>
+<body style="margin-top: -200px">
 
     <!-- ============ PAGE LOADER START ============ -->
 
@@ -220,10 +220,10 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Modal Header</h4>
+                                    <h4 class="modal-title">TDT Unidersity</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>This is a small modal.</p>
+                                    <p>Do you want to vote for this candidate ?</p>
                                 </div>
                                 <div class="modal-footer">
                                     <a href="@Url.Action("CandidateVote", new { _id = candidate.ID})"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ComfirmModal" >YES</button></a>

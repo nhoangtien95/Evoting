@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="/Content/images/favicon.png">
     <!-- Main Stylesheet -->
     <link href="/Content/CSS/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <!-- HTML5 shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -62,7 +62,7 @@
                             <br /><br />
                         </div>
                 }
-                    <input type="button" id="Verify" class="btn btn-primary" style="margin-top: -220px" value="Verify" />
+                    <input type="button" id="Verify" class="btn btn-primary" style="margin-top: -120px" value="Verify" />
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
                 <div class="row" style="padding-left: 399px">                    
                     <div class="col-sm-6" style="padding-top: 60px; position:relative">
                         <div class="col-sm-12 alert alert-danger err-signup" id="err-signup" style="display: none; ">
-                            <h5>Fail</h5>
+                            <h5 style="text-align: center">Fail</h5>
                         </div>
                         <h2>Creating Account To Vote</h2>
                         <div class="form-group" id="job-email-group">
@@ -139,7 +139,7 @@
                     type: 'POST',
                     success: function (data) {
                         if (data != null && data.success) {
-                            $('#show_message').fadeIn(500).delay(800);
+                            //$('#show_message').fadeIn(500).delay(800);
                         } else {
                             console.log(data);
                             $('.err-signup').fadeIn(500).delay(800);

@@ -58,16 +58,24 @@ namespace Evoting.Controllers
             {
                 return RedirectToAction("Index", "Vote");
             }
-            var _candidate = db.Candidates.SingleOrDefault(x => x.ID.Equals(_id));
+            var checkVote = db.Users.SingleOrDefault(x => x.Username.Equals(user.Username));
+            if(checkVote.Voted != 1)
+            {
+                var _candidate = db.Candidates.SingleOrDefault(x => x.ID.Equals(_id));
 
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-            string _pubkey = rsa.ToXmlString(false);
-            string _prikey = rsa.ToXmlString(true);
+                RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+                string _pubkey = rsa.ToXmlString(false);
+                string _prikey = rsa.ToXmlString(true);
 
-            Session["PrivateKeySession"] = new PrivateKeySession { PrivateKey = _prikey };
-            var encryptedVote = Convert.ToBase64String(RSAEncrypt(Encoding.Unicode.GetBytes(_candidate.Name), _pubkey));
+                Session["PrivateKeySession"] = new PrivateKeySession { PrivateKey = _prikey };
+                var encryptedVote = Convert.ToBase64String(RSAEncrypt(Encoding.Unicode.GetBytes(_candidate.Name), _pubkey));
 
-            return RedirectToAction("Index", "AR", new { _id = _id, _dataBase64 = encryptedVote});
+                return RedirectToAction("Index", "AR", new { _id = _id, _dataBase64 = encryptedVote });
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         public static byte[] RSAEncrypt(byte[] data, string pubKey)

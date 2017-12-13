@@ -351,6 +351,8 @@
     <Content Include="Views\Candidates\Index.cshtml" />
     <Content Include="Views\Candidates\CandidateDetail.cshtml" />
     <Content Include="Views\Vote\VoteSuccess.cshtml" />
+    <Content Include="Views\Vote\SignUpSuccess.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

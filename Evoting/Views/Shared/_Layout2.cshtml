@@ -1,4 +1,7 @@
-﻿<meta charset="utf-8">
+﻿@{
+    var user = Session["UserSession"] as Evoting.Models.UserSession;
+}
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="Jobseek - Job Board Responsive HTML Template">
@@ -8,7 +11,14 @@
 
 <!-- Main Stylesheet -->
 <link href="/Content/CSS/style.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="container text-center" style="margin-top: 150px; background-color:#14b1bb">
+        <div class="title">
+            <div class="col-sm-12">
+                <h5 style="text-align:right; padding-top: 15px">Hello, @user.Username | <a href="@Url.Action("Logout", "Vote")" style="all: unset; color:red">Logout</a></h5>
+                <br />
+            </div>
+        </div>
+    </div>
 
 @RenderBody()
 

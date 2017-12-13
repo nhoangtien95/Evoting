@@ -72,22 +72,51 @@ namespace Evoting.Controllers
         [HttpPost]
         public ActionResult SingUp(string username, string password, string key)
         {
-            if (username == null || password == null)
+            var checkID = db.Citizens.SingleOrDefault(x => x.ID.Equals(key));
+
+            if(checkID.Account != 1)
             {
-                var checkUsername = db.Users.SingleOrDefault(x => x.Username.Equals(username));
-                if( checkUsername != null)
+                if (username == null || password == null || username == "" || password == "")
                 {
-                    return Content("Please select another username.");
+                    var checkUsername = db.Users.SingleOrDefault(x => x.Username.Equals(username));
+                    if (checkUsername != null)
+                    {
+                        return Content("Please select another username.");
+                    }
+                    else return Content("Please fill in !");
                 }
-                else return Content("Please fill in !");
+                else
+                {
+                    var user = new User
+                    {
+                        Username = username,
+                        Password = password,
+                        Coin = 1
+                    };
+
+                    db.Users.Add(user);
+                    db.SaveChanges();
+
+                    var citizen = db.Citizens.SingleOrDefault(x => x.ID.Equals(key));
+
+                    citizen.Account = 1;
+
+                    db.Entry(citizen).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+
+                    return RedirectToAction("SignUpSuccess", "Vote");
+
+                    //return Json(new
+                    //{
+                    //    success = true
+                    //}, JsonRequestBehavior.AllowGet);
+                }
             }
             else
             {
-                return Json(new
-                {
-                    success = true
-                }, JsonRequestBehavior.AllowGet);
+                return Content("You already created an account.");
             }
+            
         }
 
         [HttpPost]
@@ -100,10 +129,8 @@ namespace Evoting.Controllers
                 return View("SignIn");
             }
             else if (user.Password.Equals(Password))
-            {
-               
-
-                //generate public key > send to AS 
+            {  
+                //Generate public key > send to AS 
                 string key = Guid.NewGuid().ToString("N");
                 return RedirectToAction("create_BC", "AS", new { _key = key, _username = Username });
             }
@@ -127,6 +154,19 @@ namespace Evoting.Controllers
         public ActionResult VoteSuccess()
         {
             return View();
+        }
+
+        public ActionResult SignUpSuccess()
+        {
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session["UserSession"] = null;
+            Session["TokenSession"] = null;
+            Session["user_TokenSession"] = null;
+            return RedirectToAction("Index", "Vote");
         }
     }
 }
