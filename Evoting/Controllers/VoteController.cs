@@ -12,17 +12,27 @@ namespace Evoting.Controllers
         private EvoteEntities1 db = new EvoteEntities1();
         // GET: Vote
         public ActionResult Index()
-        {
+        {            
             return View();
         }
 
         public ActionResult SignUp()
         {
+            var user = Session["UserSession"] as UserSession;
+            if (user != null)
+            {
+                return RedirectToAction("Index", "Candidates");
+            }
             return View();
         }
 
         public ActionResult SignIn()
         {
+            var user = Session["UserSession"] as UserSession;
+            if (user != null)
+            {
+                return RedirectToAction("Index", "Candidates");
+            }
             return View();
         }
 
@@ -60,12 +70,16 @@ namespace Evoting.Controllers
         }
 
         [HttpPost]
-        public ActionResult SingUp(string username, string password)
+        public ActionResult SingUp(string username, string password, string key)
         {
-            if (username != null)
+            if (username == null || password == null)
             {
-                return Content("Please fill in !");
-
+                var checkUsername = db.Users.SingleOrDefault(x => x.Username.Equals(username));
+                if( checkUsername != null)
+                {
+                    return Content("Please select another username.");
+                }
+                else return Content("Please fill in !");
             }
             else
             {
@@ -87,7 +101,7 @@ namespace Evoting.Controllers
             }
             else if (user.Password.Equals(Password))
             {
-                Session["UserSession"] = new UserSession { Username = Username, Password = Password };
+               
 
                 //generate public key > send to AS 
                 string key = Guid.NewGuid().ToString("N");

@@ -15,6 +15,11 @@ namespace Evoting.Controllers
         // GET: Candidates
         public ActionResult Index()
         {
+            var user = Session["UserSession"] as UserSession;
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Vote");
+            }
             var candidates = db.Candidates.ToList();
             Random rnd = new Random();
             int r = rnd.Next(candidates.Count());
@@ -26,6 +31,11 @@ namespace Evoting.Controllers
 
         public ActionResult CandidateDetail(int _id = 0)
         {
+            var user = Session["UserSession"] as UserSession;
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Vote");
+            }
             if ( _id == 0)
             {
                 return RedirectToAction("Index");
@@ -43,6 +53,11 @@ namespace Evoting.Controllers
 
         public ActionResult CandidateVote(int _id)
         {
+            var user = Session["UserSession"] as UserSession;
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Vote");
+            }
             var _candidate = db.Candidates.SingleOrDefault(x => x.ID.Equals(_id));
 
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();

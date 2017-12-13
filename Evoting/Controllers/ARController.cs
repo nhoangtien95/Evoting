@@ -14,7 +14,12 @@ namespace Evoting.Controllers
         private readonly EvoteEntities1 db = new EvoteEntities1();
         // GET: AR
         public ActionResult Index(int? _id ,string _dataBase64)
-        {            
+        {
+            var user = Session["UserSession"] as UserSession;
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Vote");
+            }
             var _token = Session["TokenSession"] as TokenSession;
             var _userToken = Session["user_TokenSession"] as UserSession;
 

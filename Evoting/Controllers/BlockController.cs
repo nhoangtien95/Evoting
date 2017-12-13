@@ -16,6 +16,11 @@ namespace Evoting.Controllers
         // GET: Block
         public ActionResult Index(int _id, string _dataBase64)
         {
+            var user = Session["UserSession"] as UserSession;
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Vote");
+            }
             if (_dataBase64 == null)
             {
                 return RedirectToAction("SignIn", "Vote");

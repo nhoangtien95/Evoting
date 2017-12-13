@@ -106,6 +106,7 @@ namespace Evoting.Controllers
             var _encryptToken = encryptToken(_token, _keyToken);
             var _encryptKey = CreateKey(Encoding.Unicode.GetBytes(_keyToken));
 
+            Session["UserSession"] = new UserSession { Username = _username };
             Session["TokenSession"] = new TokenSession { Token = _encryptToken, TokenKey = _encryptKey };
             Session["user_TokenSession"] = new UserSession { Token = _token };
             return RedirectToAction("Index", "Candidates");
