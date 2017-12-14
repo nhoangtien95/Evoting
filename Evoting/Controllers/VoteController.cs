@@ -103,13 +103,12 @@ namespace Evoting.Controllers
 
                     db.Entry(citizen).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
+                    
 
-                    return RedirectToAction("SignUpSuccess", "Vote");
-
-                    //return Json(new
-                    //{
-                    //    success = true
-                    //}, JsonRequestBehavior.AllowGet);
+                    return Json(new
+                    {
+                        success = true
+                    }, JsonRequestBehavior.AllowGet);
                 }
             }
             else

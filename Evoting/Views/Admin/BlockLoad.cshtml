@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+    var blocks = ViewBag.Blocks as List<Evoting.Models.Block>;
+}
+
+    @foreach (var item in blocks)
+    {
+        <div class="col-lg-6" style=" max-width: 560px; width: 560px">
+            <section class="panel">
+                <header class="panel-heading">
+                    @item.Block_ID
+                </header>
+                <div class="panel-body" style="background-color:#78CD51">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Block Key</label>
+                            <div class="iconic-input">
+                                <input type="text" class="form-control b_key" disabled value="@item.Block_key">
+                            </div>
+                            <label>Data</label>
+                            <div class="iconic-input">
+                                <input type="text" class="form-control test" id=@item.Block_ID value="@item.Data">
+                            </div>
+                            <label>Previous Key</label>
+                            <div class="iconic-input">
+                                <input type="text" class="form-control" disabled value="@item.Prev_ID">
+                            </div>
+                            <label>Hash Code</label>
+                            <div class="iconic-input">
+                                <input type="text" class="form-control" disabled value="@item.Code">
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+        </div>
+    }
+
+<script>     
+
+        $('.test').keyup(function () {
+            var id = this.id;
+            var data = this.value;
+            console.log(id);
+            console.log(data);
+            $.ajax({
+                url: '@Url.Action("Hash", "Admin")',
+                data: { _id: id, _data: data },
+                type: 'POST',
+                success: function (data) {
+                    if (data != null && data.success) {
+                        console.log("success")
+                        $('.blockchains').load('@Url.Content(Url.Action("BlockLoad", "Admin"))');
+                    }
+                }
+            });
+        });
+    
+</script>

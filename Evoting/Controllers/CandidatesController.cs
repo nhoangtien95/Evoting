@@ -44,9 +44,11 @@ namespace Evoting.Controllers
             {
                 var candidate = db.Candidates.SingleOrDefault(x => x.ID.Equals(_id));
                 var candidates = db.Candidates.Where(x => x.ID != _id).Take(6).ToList();
+                var _user = db.Users.SingleOrDefault(x => x.Username.Equals(user.Username));
 
                 ViewBag.Candidates = candidates;
                 ViewBag.Candidate = candidate;
+                ViewBag.User = _user;
                 return View();
             }           
         }

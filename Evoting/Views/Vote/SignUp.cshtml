@@ -67,9 +67,9 @@
             </div>
 
 
-        @using (Html.BeginForm("Verify", "Vote", FormMethod.Post, new { id = "show_message", style = "display:none" }))
-        {
-                <div class="row" style="padding-left: 399px">                    
+        
+            <form id="show_message" style="display: none">
+                <div class="row" style="padding-left: 399px">
                     <div class="col-sm-6" style="padding-top: 60px; position:relative">
                         <div class="col-sm-12 alert alert-danger err-signup" id="err-signup" style="display: none; ">
                             <h5 style="text-align: center">Fail</h5>
@@ -82,15 +82,14 @@
                         <div class="form-group" id="job-title-group">
                             <label for="job-title">Password</label>
                             <input type="text" class="form-control" id="password" placeholder="Your Password">
-                        </div>                        
+                        </div>
                     </div>
                 </div>
                 <div class="row text-center">
                     <p>&nbsp;</p>
                     <a href="#" id="SignUp" class="btn btn-primary btn-lg">Create <i class="fa fa-address-book" aria-hidden="true"></i></a>
                 </div>
-        }
-            
+            </form>
         </div>
     </section>
 
@@ -139,7 +138,7 @@
                     type: 'POST',
                     success: function (data) {
                         if (data != null && data.success) {
-                            //$('#show_message').fadeIn(500).delay(800);
+                            location.href = '@Url.Action("SignUpSuccess", "Vote")'
                         } else {
                             console.log(data);
                             $('.err-signup').fadeIn(500).delay(800);

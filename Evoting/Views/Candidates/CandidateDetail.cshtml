@@ -1,6 +1,7 @@
 ﻿@{ 
     var candidate = ViewBag.Candidate as Evoting.Models.Candidate;
     var candidates = ViewBag.Candidates as List<Evoting.Models.Candidate>;
+    var user = ViewBag.User as Evoting.Models.User;
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 <!DOCTYPE html>
@@ -223,11 +224,27 @@
                                     <h4 class="modal-title">TDT Unidersity</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Do you want to vote for this candidate ?</p>
+                                    @if (user.Voted == 1)
+                                    {
+                                        <p>YOU HAD VOTED SUCCESSFULLY.</p>
+                                        <p>YOU CAN NOT VOTE AGAIN</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Do you want to vote for this candidate ?</p>
+                                    }
                                 </div>
                                 <div class="modal-footer">
-                                    <a href="@Url.Action("CandidateVote", new { _id = candidate.ID})"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ComfirmModal" >YES</button></a>
-                                    <button type="button" class="btn btn-danger " data-dismiss="modal">NO</button>
+                                    @if (user.Voted == 1)
+                                    {
+                                        <button type="button" class="btn btn-danger " data-dismiss="modal">Cancel</button>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("CandidateVote", new { _id = candidate.ID})"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#ComfirmModal">YES</button></a>
+                                        <button type="button" class="btn btn-danger " data-dismiss="modal">NO</button>
+                                    }
+                                    
                                 </div>
                             </div>
                         </div>
