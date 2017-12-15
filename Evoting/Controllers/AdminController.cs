@@ -98,8 +98,48 @@ namespace Evoting.Controllers
         [HttpPost]
         public ActionResult IsMine(int _id)
         {
+            var temp = db.Blocks.ToList();
+            var initilal = temp.SingleOrDefault(x => x.Block_ID.Equals(_id));
+            int num = temp.IndexOf(initilal);
+            var preBlock = temp[num - 1];
 
-            return View("Index");
+
+            var _tempBlock = db.Blocks.SingleOrDefault(x => x.Block_ID == _id);
+            string _initial = string.Empty;
+            int _sNumber = 3;
+            for (var x = 0; x < _sNumber; x++)
+            {
+                _initial += '0';
+            }
+
+            for (int i = 0; i <= 500000; i++)
+            {
+                string stemp = _tempBlock.Block_key + _tempBlock.Data + i + preBlock.Code;
+                byte[] bytes = Encoding.UTF8.GetBytes(stemp);
+                SHA256Managed hashstring = new SHA256Managed();
+                byte[] hash = hashstring.ComputeHash(bytes);
+                string hashString = string.Empty;
+                foreach (byte x in hash)
+                {
+                    hashString += String.Format("{0:x2}", x);
+                }
+                if (hashString.Substring(0, _sNumber) == _initial)
+                {
+                    _tempBlock.Secret_key = i.ToString();
+                    _tempBlock.Code = hashString;
+                    _tempBlock.Prev_ID = preBlock.Code;
+                    db.Entry(_tempBlock).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                    break;
+                }
+            }
+
+
+
+            return Json(new
+            {
+                success = true
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }

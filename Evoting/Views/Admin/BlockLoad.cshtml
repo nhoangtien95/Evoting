@@ -11,34 +11,65 @@
                 <header class="panel-heading">
                     @item.Block_ID
                 </header>
-                <div class="panel-body" style="background-color:#78CD51">
-                    <form role="form">
-                        <div class="form-group">
-                            <label>Block Key</label>
-                            <div class="iconic-input">
-                                <input type="text" class="form-control b_key" disabled value="@item.Block_key">
+                @if (item.Code.Substring(0, 3) == "000")
+                {
+                    <div class="panel-body" style="background-color:#78CD51">
+                        <form role="form">
+                            <div class="form-group">
+                                <label>Block Key</label>
+                                <div class="iconic-input">
+                                    <input type="text" class="form-control b_key" disabled value="@item.Block_key">
+                                </div>
+                                <label>Data</label>
+                                <div class="iconic-input">
+                                    <input type="text" class="form-control test" id=@item.Block_ID value="@item.Data">
+                                </div>
+                                <label>Previous Key</label>
+                                <div class="iconic-input">
+                                    <input type="text" class="form-control" disabled value="@item.Prev_ID">
+                                </div>
+                                <label>Hash Code</label>
+                                <div class="iconic-input">
+                                    <input type="text" class="form-control" disabled value="@item.Code">
+                                </div>
+                                <input type="button" value="Verify" class="btn btn-warning" name=@item.Block_ID style="margin-left: 200px; margin-top: 7px;">
                             </div>
-                            <label>Data</label>
-                            <div class="iconic-input">
-                                <input type="text" class="form-control test" id=@item.Block_ID value="@item.Data">
+                        </form>
+                    </div>
+                }
+                else
+                {
+                    <div class="panel-body" style="background-color:#ec6459">
+                        <form role="form">
+                            <div class="form-group">
+                                <label>Block Key</label>
+                                <div class="iconic-input">
+                                    <input type="text" class="form-control b_key" disabled value="@item.Block_key">
+                                </div>
+                                <label>Data</label>
+                                <div class="iconic-input">
+                                    <input type="text" class="form-control test" id=@item.Block_ID value="@item.Data">
+                                </div>
+                                <label>Previous Key</label>
+                                <div class="iconic-input">
+                                    <input type="text" class="form-control" disabled value="@item.Prev_ID">
+                                </div>
+                                <label>Hash Code</label>
+                                <div class="iconic-input">
+                                    <input type="text" class="form-control" disabled value="@item.Code">
+                                </div>
+                                <input type="button" value="Verify" class="btn btn-warning" name=@item.Block_ID style="margin-left: 200px; margin-top: 7px;">
                             </div>
-                            <label>Previous Key</label>
-                            <div class="iconic-input">
-                                <input type="text" class="form-control" disabled value="@item.Prev_ID">
-                            </div>
-                            <label>Hash Code</label>
-                            <div class="iconic-input">
-                                <input type="text" class="form-control" disabled value="@item.Code">
-                            </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                }
 
-                </div>
+
             </section>
         </div>
     }
 
-<script>     
+<script>
 
         $('.test').keyup(function () {
             var id = this.id;
@@ -56,6 +87,21 @@
                     }
                 }
             });
+    });
+
+     $(".btn").click(function () {
+            var id = this.name;
+            $.ajax({
+                url: '@Url.Action("IsMine", "Admin")',
+                data: { _id: id},
+                type: 'POST',
+                success: function (data) {
+                    if (data != null && data.success) {
+                        console.log("success")
+                        $('.blockchains').load('@Url.Content(Url.Action("BlockLoad", "Admin"))');
+                    }
+                }
+            });
         });
-    
+
 </script>
