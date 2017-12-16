@@ -17,7 +17,7 @@
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="/Content/Admin/img/favicon.html">
 
-    <title>Widget</title>
+    <title>Admin EVote</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/Content/Admin/css/bootstrap.min.css" rel="stylesheet">
@@ -48,7 +48,7 @@
                 <div data-original-title="Toggle Navigation" data-placement="right" class="fa fa-bars tooltips"></div>
             </div>
             <!--logo start-->
-            <a href="index.html" class="logo">Flat<span>lab</span></a>
+            <a href="index.html" class="logo">E<span>Vote</span></a>
             <!--logo end-->
             <div class="top-nav ">
                 <ul class="nav pull-right top-menu">
@@ -75,16 +75,23 @@
                 <!-- sidebar menu start-->
                 <ul class="sidebar-menu" id="nav-accordion">
                     <li>
-                        <a href="index.html">
+                        <a href="@Url.Action("Index", "Admin")">
                             <i class="fa fa-laptop"></i>
-                            <span>Dashboard</span>
+                            <span>BlockChain</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="index.html">
+                        <a href="@Url.Action("Candidates", "Admin")">
                             <i class="fa fa-bar-chart-o"></i>
-                            <span>Dashboard</span>
+                            <span>Candidates</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("NewCandidate", "Admin")">
+                            <i class="fa fa-bar-chart-o"></i>
+                            <span>New Candidate</span>
                         </a>
                     </li>
                 </ul>

@@ -1,4 +1,5 @@
 ﻿using Evoting.Models;
+using Evoting.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,15 +16,44 @@ namespace Evoting.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            var _blocks = db.Blocks.ToList();
+            var _blocks = db.Blocks.Where(x => x.Network == "1").ToList();
 
             ViewBag.Blocks = _blocks;
             return View();
         }
-        
+
+        public ActionResult Candidates()
+        {
+            var _blocks = db.Blocks.Where(x => x.Network == "2").ToList();
+
+            ViewBag.Blocks = _blocks;
+            return View();
+        }
+
+        public ActionResult NewCandidate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult NewCandidate(AdminModel admin)
+        {
+            Block b = new Block()
+            {
+                Block_key = admin.Name,
+                Network = "2"
+            };
+
+            var block = new BlockChainModel();
+            block.createBlock(b);
+
+
+            return View("Candidates");
+        }
+
         public PartialViewResult BlockLoad()
         {
-            var _blocks = db.Blocks.ToList();
+            var _blocks = db.Blocks.Where(x => x.Network == "1").ToList();
 
             ViewBag.Blocks = _blocks;
             return PartialView();
@@ -32,7 +62,7 @@ namespace Evoting.Controllers
         [HttpPost]
         public ActionResult Hash(int _id, string _data)
         {
-            var temp = db.Blocks.ToList();
+            var temp = db.Blocks.Where(x => x.Network == "1").ToList();
             var initilal = temp.SingleOrDefault(x => x.Block_ID.Equals(_id));
             for(int i = temp.IndexOf(initilal); i < temp.Count(); i++)
             {

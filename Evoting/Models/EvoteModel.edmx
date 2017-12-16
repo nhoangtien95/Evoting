@@ -10,7 +10,7 @@
             <PropertyRef Name="Block_ID" />
           </Key>
           <Property Name="Block_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Block_key" Type="varchar" MaxLength="50" />
+          <Property Name="Block_key" Type="nvarchar" MaxLength="50" />
           <Property Name="Data" Type="nvarchar" MaxLength="50" />
           <Property Name="Code" Type="varchar" MaxLength="1000" />
           <Property Name="Prev_ID" Type="varchar" MaxLength="1000" />
@@ -75,7 +75,7 @@
             <PropertyRef Name="Block_ID" />
           </Key>
           <Property Name="Block_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Block_key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Block_key" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Data" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Prev_ID" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />

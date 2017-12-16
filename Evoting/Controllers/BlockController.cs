@@ -42,13 +42,32 @@ namespace Evoting.Controllers
                 var block = new BlockChainModel();
                 block.isBlock(_user.Public_key, _block.Data, _block.Prev_ID, _block.Block_key);
 
+                /////////////
                 _user.Voted = 1;
                 db.Entry(_user).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 
+                /////////////
+
+                var candidate = db.Blocks.SingleOrDefault(x => x.Block_key == _voteData);
+                if(candidate != null)
+                {
+                    if(candidate.Data == null)
+                    {
+                        candidate.Data = "1";
+                        db.Entry(candidate).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        candidate.Data = (int.Parse(candidate.Data) + 1).ToString();
+                        db.Entry(candidate).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                }
+
                 return RedirectToAction("VoteSuccess", "Vote");
             }
-            return View();
         }
 
         public static string RSADecrypt(byte[] ciphertext, string srcKey)

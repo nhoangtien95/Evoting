@@ -52,13 +52,14 @@ namespace Evoting.Controllers
 
                 var _prevBlock = db.Blocks
                                 .OrderByDescending(x => x.Block_ID)
-                                .Select(x => x.Block_key)
+                                .Select(x => x.Code)
                                 .First().ToString();
 
                 Block b = new Block()
                 {
                     Block_key = _key,
-                    Prev_ID = _prevBlock
+                    Prev_ID = _prevBlock,
+                    Network = "1"
                 };
 
                 var _tempBlock = db.Blocks.SingleOrDefault(x => x.Block_key == _key);
@@ -82,8 +83,6 @@ namespace Evoting.Controllers
 
                         db.Blocks.Add(b);
                         db.SaveChanges();
-                        //db.Entry(_tempBlock).State = System.Data.Entity.EntityState.Modified;
-                        //db.SaveChanges();
                         break;
                     }
 

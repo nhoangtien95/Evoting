@@ -207,6 +207,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IBlock.cs" />
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\Block.cs">
       <DependentUpon>EvoteModel.tt</DependentUpon>
     </Compile>
@@ -678,6 +679,8 @@
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\BlockLoad.cshtml" />
+    <Content Include="Views\Admin\Candidates.cshtml" />
+    <Content Include="Views\Admin\NewCandidate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
