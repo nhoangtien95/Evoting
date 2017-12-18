@@ -1,4 +1,5 @@
 ﻿using Evoting.Models;
+using Evoting.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace Evoting.Controllers
     {
         private readonly EvoteEntities1 db = new EvoteEntities1();
         // GET: Candidates
+        #region Index
+        /// <summary>
+        ///     Candidates list view
+        /// </summary>
+        /// <returns>Candidates list</returns>
         public ActionResult Index()
         {
             var user = Session["UserSession"] as UserSession;
@@ -29,6 +35,13 @@ namespace Evoting.Controllers
             return View();
         }
 
+        #endregion
+
+        #region CandidateDetail
+        /// <summary>
+        ///     Candidate detail view
+        /// </summary>
+        /// <returns>Candidate detail</returns>
         public ActionResult CandidateDetail(int _id = 0)
         {
             var user = Session["UserSession"] as UserSession;
@@ -53,6 +66,15 @@ namespace Evoting.Controllers
             }           
         }
 
+        #endregion
+
+        #region Index
+
+        /// <summary>
+        ///     Encrypt vote with public key
+        /// </summary>
+        /// <param name="_id">Block id</param>
+        /// <returns>Passing encrypt vote to AR to verify</returns>
         public ActionResult CandidateVote(int _id)
         {
             var user = Session["UserSession"] as UserSession;
@@ -70,7 +92,7 @@ namespace Evoting.Controllers
                 string _prikey = rsa.ToXmlString(true);
 
                 Session["PrivateKeySession"] = new PrivateKeySession { PrivateKey = _prikey };
-                var encryptedVote = Convert.ToBase64String(RSAEncrypt(Encoding.Unicode.GetBytes(_candidate.Name), _pubkey));
+                var encryptedVote = Convert.ToBase64String(VoteModel.RSAEncrypt(Encoding.Unicode.GetBytes(_candidate.Name), _pubkey));
 
                 return RedirectToAction("Index", "AR", new { _id = _id, _dataBase64 = encryptedVote });
             }
@@ -80,14 +102,6 @@ namespace Evoting.Controllers
             }
         }
 
-        public static byte[] RSAEncrypt(byte[] data, string pubKey)
-        {
-            byte[] encryptedData;
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-            rsa.FromXmlString(pubKey);
-            encryptedData = rsa.Encrypt(data, true);
-            rsa.Dispose();
-            return encryptedData;
-        }
+        #endregion
     }
 }

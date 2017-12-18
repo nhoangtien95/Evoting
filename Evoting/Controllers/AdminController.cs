@@ -14,6 +14,13 @@ namespace Evoting.Controllers
     {
         private readonly EvoteEntities1 db = new EvoteEntities1();
         // GET: Admin
+
+        #region Index
+
+        /// <summary>
+        ///     Show blocks in blockchain
+        /// </summary>
+        /// <returns>View</returns>
         public ActionResult Index()
         {
             var _blocks = db.Blocks.Where(x => x.Network == "1").ToList();
@@ -21,7 +28,14 @@ namespace Evoting.Controllers
             ViewBag.Blocks = _blocks;
             return View();
         }
+        #endregion
 
+        #region Candidates
+
+        /// <summary>
+        ///     Show blocks of candidates in blockchain
+        /// </summary>
+        /// <returns>View</returns>
         public ActionResult Candidates()
         {
             var _blocks = db.Blocks.Where(x => x.Network == "2").ToList();
@@ -29,7 +43,14 @@ namespace Evoting.Controllers
             ViewBag.Blocks = _blocks;
             return View();
         }
+        #endregion
 
+        #region NewCandidate
+
+        /// <summary>
+        ///     Create new candidate block
+        /// </summary>
+        /// <returns>View</returns>
         public ActionResult NewCandidate()
         {
             return View();
@@ -51,6 +72,9 @@ namespace Evoting.Controllers
             return View("Candidates");
         }
 
+        #endregion
+
+
         public PartialViewResult BlockLoad()
         {
             var _blocks = db.Blocks.Where(x => x.Network == "1").ToList();
@@ -59,6 +83,15 @@ namespace Evoting.Controllers
             return PartialView();
         }
 
+
+        #region Hash
+
+        /// <summary>
+        ///     Hash each block to SHA256
+        /// </summary>        /// 
+        /// <param name="_id">Block id</param>
+        /// <param name="_data">Block data </param>
+        /// <returns>Hash code</returns>
         [HttpPost]
         public ActionResult Hash(int _id, string _data)
         {
@@ -82,7 +115,7 @@ namespace Evoting.Controllers
                 success = true
             }, JsonRequestBehavior.AllowGet);
         }
-
+        
         public void HashBlock(int id, string data, string prev)
         {
             var item = db.Blocks.SingleOrDefault(x => x.Block_ID.Equals(id));
@@ -124,7 +157,16 @@ namespace Evoting.Controllers
                 
         }
 
+        #endregion
 
+
+        #region IsMine
+
+        /// <summary>
+        ///     Correct hash code
+        /// </summary>        /// 
+        /// <param name="_id">Block id</param>
+        /// <returns>Correct hash code</returns>
         [HttpPost]
         public ActionResult IsMine(int _id)
         {
@@ -171,5 +213,7 @@ namespace Evoting.Controllers
                 success = true
             }, JsonRequestBehavior.AllowGet);
         }
+
+        #endregion
     }
 }

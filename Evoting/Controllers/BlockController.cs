@@ -14,6 +14,14 @@ namespace Evoting.Controllers
     {
         private readonly EvoteEntities1 db = new EvoteEntities1();
         // GET: Block
+        #region Index
+
+        /// <summary>
+        ///     Decrypt encrypted vote and passing data to blockchain
+        /// </summary>
+        /// <param name="_id">Block id</param>
+        /// <param name="_dataBase64">Encrypted vote</param>
+        /// <returns>Success vote</returns>
         public ActionResult Index(int _id, string _dataBase64)
         {
             var user = Session["UserSession"] as UserSession;
@@ -29,7 +37,7 @@ namespace Evoting.Controllers
             {
                 var _data = Convert.FromBase64String(_dataBase64);
                 var _privKey = Session["PrivateKeySession"] as PrivateKeySession;
-                var _voteData = RSADecrypt(_data, _privKey.PrivateKey);
+                var _voteData = VoteModel.RSADecrypt(_data, _privKey.PrivateKey);
 
                 var _temp = Session["UserSession"] as UserSession;
                 var _user = db.Users.SingleOrDefault(x => x.Username.Equals(_temp.Username));
@@ -70,14 +78,6 @@ namespace Evoting.Controllers
             }
         }
 
-        public static string RSADecrypt(byte[] ciphertext, string srcKey)
-        {
-            byte[] decryptedData;
-            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
-            rsa.FromXmlString(srcKey);
-            decryptedData = rsa.Decrypt(ciphertext, true);
-            rsa.Dispose();
-            return Encoding.Unicode.GetString(decryptedData);
-        }
+        #endregion
     }
 }

@@ -243,6 +243,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\BlockChain.cs" />
     <Compile Include="ViewModel\BlockChainModel.cs" />
+    <Compile Include="ViewModel\TokenModel.cs" />
+    <Compile Include="ViewModel\VoteModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin\assets\advanced-datatable\media\css\demo_page.css" />
