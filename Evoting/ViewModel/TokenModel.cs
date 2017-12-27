@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Evoting.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,9 +16,11 @@ namespace Evoting.ViewModel
             var hash = new byte[16];
             for (int i = 0; i < key.Length; i++)
             {
+                // cast byte ( 4 byte ), get last byte and convert to decimal.
                 hash[i % 16] = (byte)((31 * hash[i % 16]) ^ key[i]);
             }
 
+            //get 4 coutinous byte and backward.
             return new[] {
                 BitConverter.ToUInt32(hash, 0), BitConverter.ToUInt32(hash, 4),
                 BitConverter.ToUInt32(hash, 8), BitConverter.ToUInt32(hash, 12)
@@ -39,20 +42,21 @@ namespace Evoting.ViewModel
         {
             var keyBuffer = CreateKey(key);
             var blockBuffer = new uint[2];
-            var result = new byte[NextMultipleOf8(data.Length + 4)];
-            var lengthBuffer = BitConverter.GetBytes(data.Length);
-            Array.Copy(lengthBuffer, result, lengthBuffer.Length);
-            Array.Copy(data, 0, result, lengthBuffer.Length, data.Length);
-            using (var stream = new MemoryStream(result))
+            var result = new byte[NextMultipleOf8(data.Length + 4)]; // + 4 stand 4 bytes of length for decrypt.
+            var lengthBuffer = BitConverter.GetBytes(data.Length); // add 4 byte of length to buffer.
+            Array.Copy(lengthBuffer, result, lengthBuffer.Length); // copy buffer to result with range = buffer length.
+            Array.Copy(data, 0, result, lengthBuffer.Length, data.Length); // copy data to result, start at data[0] into result[buffer length]  with range = data length.
+            using (var stream = new MemoryStream(result)) // stream store memory, non-resizable.
             {
-                using (var writer = new BinaryWriter(stream))
+                using (var writer = new BinaryWriter(stream)) // writing byte in stream.
                 {
-                    for (int i = 0; i < result.Length; i += 8)
+                    for (int i = 0; i < result.Length; i += 8) // writing byte in stream.
                     {
+                        //Encrypt each 4 bytes of data, backward.
                         blockBuffer[0] = BitConverter.ToUInt32(result, i);
                         blockBuffer[1] = BitConverter.ToUInt32(result, i + 4);
                         EncryptAlgorithm(32, blockBuffer, keyBuffer);
-                        writer.Write(blockBuffer[0]);
+                        writer.Write(blockBuffer[0]); // write 4 bytes of buffer to result, advances the position by 4 byte.
                         writer.Write(blockBuffer[1]);
                     }
                 }

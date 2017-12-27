@@ -38,7 +38,7 @@ namespace Evoting.Controllers
         /// <returns>View</returns>
         public ActionResult Candidates()
         {
-            var _blocks = db.Blocks.Where(x => x.Network == "2").ToList();
+            var _blocks = db.Blocks.Where(x => x.Network == "2" &&  x.Code.Substring(0, 3) == "000").ToList();
 
             ViewBag.Blocks = _blocks;
             return View();

@@ -68,7 +68,7 @@ namespace Evoting.Controllers
 
         #endregion
 
-        #region Index
+        #region CandidateVote
 
         /// <summary>
         ///     Encrypt vote with public key

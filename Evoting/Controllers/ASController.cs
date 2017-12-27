@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Evoting.Controllers
 {
@@ -59,20 +60,14 @@ namespace Evoting.Controllers
             
             //Generate a token
             Random rnd = new Random();
-            string _token = string.Empty;
-            var xtea = new TokenModel();
-
-            for (int i = 0; i < 10; i++)
-            {
-                int _tempToken = rnd.Next(0, 9);
-                _token += _tempToken.ToString() ;
-            }
+            int _num = rnd.Next(0, 9);
+            string _token = Membership.GeneratePassword(24, _num);
 
             //Encrypt token and send with random key to AR server
             string _keyToken = Guid.NewGuid().ToString("N");
 
             var _encryptToken = TokenModel.encryptToken(_token, _keyToken);
-            var _encryptKey = TokenModel.CreateKey(Encoding.Unicode.GetBytes(_keyToken)); //CreateKey(Encoding.Unicode.GetBytes(_keyToken));
+            var _encryptKey = TokenModel.CreateKey(Encoding.Unicode.GetBytes(_keyToken)); // 64 bytes
 
 
             Session["UserSession"] = new UserSession { Username = _username };
